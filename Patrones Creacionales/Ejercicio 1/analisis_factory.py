@@ -51,20 +51,22 @@ class Mediana(AbstractAnalisis):
 
 class Moda(AbstractAnalisis):
     def calcular(self, data):
-        return data.mode()
+        mode_data = data.value_counts()
+        return mode_data.idxmax()
 
 def client_code(factory: AnalisisEstadisticoFactory) -> None:
     
     # Cargamos los datos del csv en la carpeta data
     data = pd.read_csv('Patrones Creacionales/Ejercicio 1/data/data_limpio.csv', sep=';', encoding='ISO-8859-1')
+    columna = 'LATITUD' # Columna que queremos analizar
 
     media = factory.crear_media()
     mediana = factory.crear_mediana()
     moda = factory.crear_moda()
 
-    print(f"Media: {media.calcular(data)}")
-    print(f"Mediana: {mediana.calcular(data)}")
-    print(f"Moda: {moda.calcular(data)}")
+    print(f"\nMedia: \n{media.calcular(data[columna])}")
+    print(f"\nMediana: \n{mediana.calcular(data[columna])}")
+    print(f"\nModa: \n{moda.calcular(data[columna])}")
 
 
 if __name__ == "__main__":
