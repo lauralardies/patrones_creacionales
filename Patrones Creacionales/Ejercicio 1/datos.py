@@ -21,3 +21,18 @@ print('\nDataframe limpio, de tamaño {}:'.format(data_limpio.shape))
 print(data_limpio.head())
 
 # No aplicamos dropna() para eliminar filas con valores nulos porque de lo contrario, vaciamos el dataframe
+
+# ----------------------------------------------------------
+# Transformación de datos
+# ----------------------------------------------------------
+
+print(data_limpio.dtypes) # Comprobamos los tipos de datos de cada columna
+# FECHA: object --> datetime64[ns]
+# HORA: object --> datetime64[ns]
+
+# Convertimos las columnas FECHA y HORA a tipo datetime
+data_limpio['FECHA'] = pd.to_datetime(data_limpio['FECHA'])
+data_limpio['HORA'] = pd.to_datetime(data_limpio['HORA'])
+
+# Guardamos el dataframe limpio en un fichero CSV
+data_limpio.to_csv('Patrones Creacionales/Ejercicio 1/data/data_limpio.csv', sep=';', encoding='ISO-8859-1')
