@@ -82,14 +82,14 @@ class Grafica(AbstractGrafica):
         if data[columna].dtypes == 'datetime64[ns]' or data[columna].dtypes == 'M8[ns]':
             val = data.groupby(data[columna].dt.date).size()
         val.plot(kind='hist')
-        plt.show()
+        plt.savefig('Patrones Creacionales/Ejercicio 1/graficas/histograma.png')
 
     def mostrar_diagrama_barras(self, data, columna):
         val = data[columna]
         if data[columna].dtypes == 'datetime64[ns]' or data[columna].dtypes == 'M8[ns]':
             val = data.groupby(data[columna].dt.date).size()
         val.plot(kind='bar')
-        plt.show()
+        plt.savefig('Patrones Creacionales/Ejercicio 1/graficas/diagramabarras.png')
 
 
 def client_code(factory: AbstractFactory) -> None:
@@ -131,3 +131,4 @@ if __name__ == "__main__":
 
     print("\nClient: Testing la factoría de Visualización de Datos:")
     client_code(ConcreteGraficasFactory())
+    print("Las gráficas se han guardado en la carpeta graficas.")
