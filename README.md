@@ -40,7 +40,7 @@ Características a considerar:
 
 Objetivos:
 
-1.Diseñar un sistema que permita a los clientes construir su pizza paso a paso utilizando el patrón Builder.
+1. Diseñar un sistema que permita a los clientes construir su pizza paso a paso utilizando el patrón Builder.
 2. Asegurar que cada elección sea validada para ser compatible con las selecciones previas del cliente.
 3. Incorporar un sistema de recomendaciones que sugiera ingredientes, técnicas y maridajes basados en las elecciones previas del cliente.
 4. Desarrollar un módulo que guarde cada pizza personalizada en un archivo CSV, almacenando cada detalle, desde los ingredientes hasta el maridaje recomendado.
