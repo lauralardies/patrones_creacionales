@@ -55,6 +55,10 @@ Encontramos todos los archivos en una carpeta llamada `Patrones Creacionales`, d
 - Carpeta `Ejercicio 1`:
   - Carpeta `data`, donde guardamos en archivo CSV una vez ha sido limpiado.
   - Carpeta `graficas`, donde almacenamos las gráficas generadas en la visualización de datos.
+  - Archivo `abstract_factory.py`. Aquí empleamos el patrón abstract factory para análisis de datos y visualización de gráficos.
+  - Archivo `datos.py`, que analiza el archivo CSV y lo limpiamos.
+  - Archivo `main.py`. Aquí generamos el código de cliente.
+  - Archivo `run.py`, el lanzador.
     
 - Carpeta `Ejercicio 2`
 
