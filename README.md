@@ -1,4 +1,4 @@
-# patrones_creacionales
+# Patrones Creacionales
 
 Mi dirección de GitHub para este repositorio es la siguiente: [GitHub](https://github.com/lauralardies/patrones_creacionales)
 https://github.com/lauralardies/patrones_creacionales
