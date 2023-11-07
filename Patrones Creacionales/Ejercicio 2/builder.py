@@ -40,7 +40,7 @@ class Builder(ABC):
 
 
 
-class ConcreteBuilder1(Builder):
+class PizzaBuilder(Builder):
 
     def __init__(self) -> None:
         self.reset()
@@ -59,7 +59,7 @@ class ConcreteBuilder1(Builder):
             print("Seleccione el tipo de masa: \n- Masa tradicional\n- Masa integral\n- Masa sin gluten\n")
             opcion = input(">> ")
             if opcion in ["Masa tradicional", "Masa integral", "Masa sin gluten"]:
-                self._pizza.add(opcion)
+                self._pizza.agregar(opcion)
                 break
             else:
                 print("Opción no valida")
@@ -69,7 +69,7 @@ class ConcreteBuilder1(Builder):
             print("Seleccione el tipo de salsa: \n- Salsa de tomate\n- Salsa barbacoa\n- Salsa carbonara\n")
             opcion = input(">> ")
             if opcion in ["Salsa de tomate", "Salsa barbacoa", "Salsa carbonara"]:
-                self._pizza.add(opcion)
+                self._pizza.agregar(opcion)
                 break
             else:
                 print("Opción no valida")
@@ -85,7 +85,7 @@ class ConcreteBuilder1(Builder):
                 else:
                     pass
             if len(validas) == 0:
-                self._pizza.add(opciones)
+                self._pizza.agregar(opciones)
                 break
             else:
                 print("Hay alguna opción no válida, vuelva a intentarlo")
@@ -95,7 +95,7 @@ class ConcreteBuilder1(Builder):
             print("Seleccione el tipo de cocción: \n- Horno de leña\n- Horno eléctrico\n- Horno de gas\n")
             opcion = input(">> ")
             if opcion in ["Horno de leña", "Horno eléctrico", "Horno de gas"]:
-                self._pizza.add(opcion)
+                self._pizza.agregar(opcion)
                 break
             else:
                 print("Opción no valida")
@@ -105,7 +105,7 @@ class ConcreteBuilder1(Builder):
             print("Seleccione el tipo de presentación: \n- Pizza entera\n- Pizza por raciones\n")
             opcion = input(">> ")
             if opcion in ["Pizza entera", "Pizza por raciones"]:
-                self._pizza.add(opcion)
+                self._pizza.agregar(opcion)
                 break
             else:
                 print("Opción no valida")
@@ -125,39 +125,31 @@ class ConcreteBuilder1(Builder):
                 else:
                     pass
             if len(validas) == 0:
-                self._pizza.add(opciones)
+                self._pizza.agregar(opciones)
                 break
             else:
                 print("Hay alguna opción no válida, vuelva a intentarlo")
 
 
-class Product1():
-    """
-    It makes sense to use the Builder pattern only when your products are quite
-    complex and require extensive configuration.
-
-    Unlike in other creational patterns, different concrete builders can produce
-    unrelated products. In other words, results of various builders may not
-    always follow the same interface.
-    """
+class Pizza():
 
     def __init__(self) -> None:
-        self.parts = []
+        self.partes = []
 
-    def add(self, part: Any) -> None:
-        self.parts.append(part)
+    def agregar(self, parte: Any) -> None:
+        self.partes.append(parte)
 
-    def list_parts(self) -> None:
-        print(f"Product parts: {', '.join(self.parts)}", end="")
+    def escribir_partes(self) -> None:
+        print("Partes de la pizza:")
+        for element in self.partes:
+            if type(element) == list:
+                for el in element:
+                    print(f"- {el}")
+            else:
+                print(f"- {element}")
 
 
 class Director:
-    """
-    The Director is only responsible for executing the building steps in a
-    particular sequence. It is helpful when producing products according to a
-    specific order or configuration. Strictly speaking, the Director class is
-    optional, since the client can control builders directly.
-    """
 
     def __init__(self) -> None:
         self._builder = None
@@ -168,52 +160,36 @@ class Director:
 
     @builder.setter
     def builder(self, builder: Builder) -> None:
-        """
-        The Director works with any builder instance that the client code passes
-        to it. This way, the client code may alter the final type of the newly
-        assembled product.
-        """
         self._builder = builder
 
-    """
-    The Director can construct several product variations using the same
-    building steps.
-    """
+    def construir_min(self) -> None:
+        self.builder.masa()
+        self.builder.salsa()
+        self.builder.ingredientes()
+        self.builder.coccion()
 
-    def build_minimal_viable_product(self) -> None:
-        self.builder.produce_part_a()
-
-    def build_full_featured_product(self) -> None:
-        self.builder.produce_part_a()
-        self.builder.produce_part_b()
-        self.builder.produce_part_c()
+    def construir_completo(self) -> None:
+        self.builder.masa()
+        self.builder.salsa()
+        self.builder.ingredientes()
+        self.builder.coccion()
+        self.builder.presentacion()
+        self.builder.maridajes()
+        self.builder.extras()
 
 
 if __name__ == "__main__":
-    """
-    The client code creates a builder object, passes it to the director and then
-    initiates the construction process. The end result is retrieved from the
-    builder object.
-    """
 
     director = Director()
-    builder = ConcreteBuilder1()
+    builder = PizzaBuilder()
     director.builder = builder
 
     print("Standard basic product: ")
-    director.build_minimal_viable_product()
-    builder.product.list_parts()
+    director.construir_min()
+    builder.pizza.escribir_partes()
 
     print("\n")
 
     print("Standard full featured product: ")
-    director.build_full_featured_product()
-    builder.product.list_parts()
-
-    print("\n")
-
-    # Remember, the Builder pattern can be used without a Director class.
-    print("Custom product: ")
-    builder.produce_part_a()
-    builder.produce_part_b()
-    builder.product.list_parts()
+    director.construir_completo()
+    builder.pizza.escribir_partes()
