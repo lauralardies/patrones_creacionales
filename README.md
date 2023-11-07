@@ -51,6 +51,13 @@ Objetivos:
 
 ## Archivos
 
+Encontramos todos los archivos en una carpeta llamada `Patrones Creacionales`, donde a su vez podemos encontrar otras dos carpetas:
+- Carpeta `Ejercicio 1`:
+  - Carpeta `data`, donde guardamos en archivo CSV una vez ha sido limpiado.
+  - Carpeta `graficas`, donde almacenamos las gráficas generadas en la visualización de datos.
+    
+- Carpeta `Ejercicio 2`
+
 ## Código
 
 ### Ejercicio 1
