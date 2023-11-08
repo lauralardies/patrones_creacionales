@@ -1,17 +1,12 @@
-from __future__ import annotations
-from abc import ABC, abstractmethod
+from abstract_factory import AbstractFactory
 from abstract_analisis import AbstractAnalisis
 from abstract_grafica import AbstractGrafica
+from grafica import Grafica
 
-class AbstractFactory(ABC):
+class ConcreteGraficasFactory(AbstractFactory):
 
-    def __init__(self):
-        pass
-
-    @abstractmethod
     def crear_analisis_estadistico(self) -> AbstractAnalisis:
-        pass
+        return None # No se implementa en este caso
 
-    @abstractmethod
     def crear_graficas(self) -> AbstractGrafica:
-        pass
+        return Grafica()
