@@ -1,7 +1,7 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Any
-
+import csv
 
 class Builder(ABC):
 
@@ -140,14 +140,17 @@ class Pizza():
         self.partes.append(parte)
 
     def escribir_partes(self) -> None:
-        print("Partes de la pizza:")
         for element in self.partes:
             if type(element) == list:
                 for el in element:
                     print(f"- {el}")
             else:
                 print(f"- {element}")
-
+    
+    def guardar_csv(self):
+        with open("Patrones creacionales/Ejercicio 2/data/pizza_cliente.csv", "a", newline="") as archivo:
+            writer = csv.writer(archivo)
+            writer.writerow(self.partes)
 
 class Director:
 
@@ -176,20 +179,3 @@ class Director:
         self.builder.presentacion()
         self.builder.maridajes()
         self.builder.extras()
-
-
-if __name__ == "__main__":
-
-    director = Director()
-    builder = PizzaBuilder()
-    director.builder = builder
-
-    print("Standard basic product: ")
-    director.construir_min()
-    builder.pizza.escribir_partes()
-
-    print("\n")
-
-    print("Standard full featured product: ")
-    director.construir_completo()
-    builder.pizza.escribir_partes()
