@@ -73,14 +73,14 @@ class PizzaBuilder(Builder):
                 print("Opción no valida")
 
     def maridajes(self) -> None:
-        if self.masa == "Masa tradicional":
+        if self.masa == "Masa tradicional" and self.salsa == "Salsa de tomate":
             print("Maridaje recomendado: Vino tinto")
-        elif self.masa == "Masa integral":
-            print("Maridaje recomendado: Vino blanco")
-        elif self.masa == "Masa sin gluten":
+        elif self.masa == "Masa integral" and self.salsa == "Salsa barbacoa":
+            print("Maridaje recomendado: Vino blanco") 
+        elif self.masa == "Masa sin gluten" and self.salsa == "Salsa carbonara":
             print("Maridaje recomendado: Cerveza sin gluten")
         else:
-            pass
+            print("No hay maridaje recomendado")
 
     def extras(self) -> None:
         while True:
