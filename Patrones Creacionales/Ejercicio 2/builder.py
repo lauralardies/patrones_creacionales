@@ -116,11 +116,11 @@ class PizzaBuilder(Builder):
 
     def extras(self) -> None:
         while True:
-            print("Seleccione los extras separados por comas: \n- Queso extra\n- Jamón extra\n- Bacon extra\n- Cebolla extra\n- Pimiento extra\n- Piña extra\n- Carne picada extra\n- Pollo extra\n- Atún extra\n- Tomate extra\n- Aceitunas extra\n- Maíz extra\n- Champiñones extra\n- Anchoas extra\n- Salami extra\n- Pimiento picante extra\n- Rúcula extra\n- Salsa barbacoa extra\n- Salsa carbonara extra\n")
+            print("Seleccione los extras separados por comas: \n- Queso extra\n- Jamón extra\n- Bacon extra\n- Cebolla extra\n- Pimiento extra\n- Piña extra\n- Carne picada extra\n- Pollo extra\n- Atún extra\n- Tomate extra\n- Aceitunas extra\n- Maíz extra\n- Champiñones extra\n- Anchoas extra\n- Salami extra\n- Pimiento picante extra\n- Rúcula extra\n- Salsa barbacoa extra\n- Salsa carbonara extra\n- None")
             opciones = input(">> ").split(",")
             validas = []
             for opcion in opciones:
-                if opcion not in ["Queso extra", "Jamón extra", "Bacon extra", "Cebolla extra", "Pimiento extra", "Piña extra", "Carne picada extra", "Pollo extra", "Atún extra", "Tomate extra", "Aceitunas extra", "Maíz extra", "Champiñones extra", "Anchoas extra", "Salami extra", "Pimiento picante extra", "Rúcula extra", "Salsa barbacoa extra", "Salsa carbonara extra"]:
+                if opcion not in ["Queso extra", "Jamón extra", "Bacon extra", "Cebolla extra", "Pimiento extra", "Piña extra", "Carne picada extra", "Pollo extra", "Atún extra", "Tomate extra", "Aceitunas extra", "Maíz extra", "Champiñones extra", "Anchoas extra", "Salami extra", "Pimiento picante extra", "Rúcula extra", "Salsa barbacoa extra", "Salsa carbonara extra", "None"]:
                     validas.append(opcion)
                 else:
                     pass
