@@ -6,9 +6,8 @@ if __name__ == "__main__":
     
     print('Analizamos las activaciones por día.')
 
-    print("Client: Testing la factoría de Análisis Estadísticos:")
-    client_code(ConcreteAnalisisFactory())
+    # Sólo calculamos la media de las activaciones por día y sólo dibujamos el histograma
+    client_code(ConcreteAnalisisFactory(), media = True)
+    client_code(ConcreteGraficasFactory(), histograma = True)
 
-    print("\nClient: Testing la factoría de Visualización de Datos:")
-    client_code(ConcreteGraficasFactory())
     print("Las gráficas se han guardado en la carpeta graficas.")

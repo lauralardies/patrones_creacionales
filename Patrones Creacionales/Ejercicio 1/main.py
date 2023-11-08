@@ -2,7 +2,7 @@ from abstract_factory import AbstractFactory
 import pandas as pd
 
 
-def client_code(factory: AbstractFactory) -> None:
+def client_code(factory: AbstractFactory, media = False, mediana = False, moda = False, histograma = False, diagrama_barras = False) -> None:
 
     # Cargamos los datos del csv en la carpeta data
     data = pd.read_csv('Patrones Creacionales/Ejercicio 1/data/data_limpio.csv', sep=';', encoding='ISO-8859-1')
@@ -24,11 +24,21 @@ def client_code(factory: AbstractFactory) -> None:
     visualizacon_graficas = factory.crear_graficas()
 
     if visualizacon_graficas is None:
-        print(f"\nMedia: \n{analisis_estadistico.calcular_media(data, columna)}")
-        print(f"\nMediana: \n{analisis_estadistico.calcular_mediana(data, columna)}")
-        print(f"\nModa: \n{analisis_estadistico.calcular_moda(data, columna)}")
+        if media:
+            print(f"\nMedia: \n{analisis_estadistico.calcular_media(data, columna)}")
+        elif mediana:
+            print(f"\nMediana: \n{analisis_estadistico.calcular_mediana(data, columna)}")
+        elif moda:
+            print(f"\nModa: \n{analisis_estadistico.calcular_moda(data, columna)}")
+        else:
+            pass
+
     elif analisis_estadistico is None:
-        visualizacon_graficas.mostrar_histograma(data, columna)
-        visualizacon_graficas.mostrar_diagrama_barras(data, columna)
+        if histograma:
+            visualizacon_graficas.mostrar_histograma(data, columna)
+        elif diagrama_barras:
+            visualizacon_graficas.mostrar_diagrama_barras(data, columna)
+        else:
+            pass
     else:
         pass
