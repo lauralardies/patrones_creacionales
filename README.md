@@ -51,14 +51,22 @@ Objetivos:
 
 ## Archivos
 
-Encontramos todos los archivos en una carpeta llamada `Patrones Creacionales`, donde a su vez podemos encontrar otras dos carpetas:
+Encontramos todos los archivos en una carpeta llamada `Patrones Creacionales`, donde a su vez podemos encontrar otras dos subcarpetas:
 - Carpeta `Ejercicio 1`:
-  - Carpeta `data`, donde guardamos en archivo CSV una vez ha sido limpiado.
+  - Carpeta `data`, donde guardamos en archivo CSV una vez ha sido limpiado y además podemos encontrar un archivo llamado `datos.py`, que es el encargado de analizar los datos y limpiarlos.
   - Carpeta `graficas`, donde almacenamos las gráficas generadas en la visualización de datos.
-  - Archivo `abstract_factory.py`. Aquí empleamos el patrón abstract factory para análisis de datos y visualización de gráficos.
-  - Archivo `datos.py`, que analiza el archivo CSV y lo limpiamos.
   - Archivo `main.py`. Aquí generamos el código de cliente.
-  - Archivo `run.py`, el lanzador.
+  - Archivo `run.py`, el lanzador desde el cual se ejecuta todo el programa.
+  - Por último, encontramos una serie de archivos que conjuntamente forman un patrón conocido como **Abstract Factory**. Los archivos que forman este patrón son los siguientes:
+    - `abstract_factory.py`.
+    - `abstract_analisis.py`
+    - `abstract_grafica.py`
+    - `concrete_analisis_factory.py`
+    - `concrete_analisis_factory.py`
+    - `analisis.py`
+    - `grafica.py`
+
+   > ¿Por qué empleamos el patrón Abstract Factory para este ejercicio?
     
 - Carpeta `Ejercicio 2`
 
@@ -111,107 +119,14 @@ print(data_limpio.dtypes) # Comprobamos los tipos de datos de cada columna
 # Guardamos el dataframe limpio en un fichero CSV dentro de la carpeta data
 data_limpio.to_csv('Patrones Creacionales/Ejercicio 1/data/data_limpio.csv', sep=';', encoding='ISO-8859-1')
 ```
-#### Archivo `abstract_factory.py`
-```
-from __future__ import annotations
-from abc import ABC, abstractmethod
-import matplotlib.pyplot as plt
 
-
-class AbstractFactory(ABC):
-
-    @abstractmethod
-    def crear_analisis_estadistico(self) -> AbstractAnalisis:
-        pass
-
-    @abstractmethod
-    def crear_graficas(self) -> AbstractGrafica:
-        pass
-
-
-class ConcreteAnalisisFactory(AbstractFactory):
-
-    def crear_analisis_estadistico(self) -> AbstractAnalisis:
-        return Analisis()
-
-    def crear_graficas(self) -> AbstractGrafica:
-        return None # No se implementa en este caso
-
-
-class ConcreteGraficasFactory(AbstractFactory):
-
-    def crear_analisis_estadistico(self) -> AbstractAnalisis:
-        return None # No se implementa en este caso
-
-    def crear_graficas(self) -> AbstractGrafica:
-        return Grafica()
-
-
-class AbstractAnalisis(ABC):
-    @abstractmethod
-    def calcular_media(self, data, columna):
-        pass
-    
-    def calcular_mediana(self, data, columna):
-        pass
-
-    def calcular_moda(self, data, columna):
-        pass
-
-
-class Analisis(AbstractAnalisis):
-
-    def calcular_media(self, data, columna):
-        val = data[columna]
-        if data[columna].dtypes == 'datetime64[ns]' or data[columna].dtypes == 'M8[ns]':
-            val = data.groupby(data[columna].dt.date).size()
-        return val.mean()
-
-    def calcular_mediana(self, data, columna):
-        val = data[columna]
-        if data[columna].dtypes == 'datetime64[ns]' or data[columna].dtypes == 'M8[ns]':
-            val = data.groupby(data[columna].dt.date).size()
-        return val.median()
-
-    def calcular_moda(self, data, columna):
-        val = data[columna]
-        if data[columna].dtypes == 'datetime64[ns]' or data[columna].dtypes == 'M8[ns]':
-            val = data.groupby(data[columna].dt.date).size()
-        mode_val = val.value_counts()
-        return mode_val.idxmax()
-
-
-class AbstractGrafica(ABC):
-    @abstractmethod
-    def mostrar_histograma(self, data, columna):
-        pass
-
-    def mostrar_diagrama_barras(self, data, columna):
-        pass
-
-
-class Grafica(AbstractGrafica):
-    def mostrar_histograma(self, data, columna):
-        val = data[columna]
-        if data[columna].dtypes == 'datetime64[ns]' or data[columna].dtypes == 'M8[ns]':
-            val = data.groupby(data[columna].dt.date).size()
-        val.plot(kind='hist')
-        plt.savefig('Patrones Creacionales/Ejercicio 1/graficas/histograma.png')
-
-    def mostrar_diagrama_barras(self, data, columna):
-        val = data[columna]
-        if data[columna].dtypes == 'datetime64[ns]' or data[columna].dtypes == 'M8[ns]':
-            val = data.groupby(data[columna].dt.date).size()
-        val.plot(kind='bar')
-        plt.savefig('Patrones Creacionales/Ejercicio 1/graficas/diagramabarras.png')
-```
 #### Archivo `main.py`
 ```
 from abstract_factory import AbstractFactory
 import pandas as pd
 
 
-def client_code(factory: AbstractFactory) -> None:
+def client_code(factory: AbstractFactory, media = False, mediana = False, moda = False, histograma = False, diagrama_barras = False) -> None:
 
     # Cargamos los datos del csv en la carpeta data
     data = pd.read_csv('Patrones Creacionales/Ejercicio 1/data/data_limpio.csv', sep=';', encoding='ISO-8859-1')
@@ -233,29 +148,172 @@ def client_code(factory: AbstractFactory) -> None:
     visualizacon_graficas = factory.crear_graficas()
 
     if visualizacon_graficas is None:
-        print(f"\nMedia: \n{analisis_estadistico.calcular_media(data, columna)}")
-        print(f"\nMediana: \n{analisis_estadistico.calcular_mediana(data, columna)}")
-        print(f"\nModa: \n{analisis_estadistico.calcular_moda(data, columna)}")
+        if media:
+            print(f"\nMedia: \n{analisis_estadistico.calcular_media(data, columna)}")
+        elif mediana:
+            print(f"\nMediana: \n{analisis_estadistico.calcular_mediana(data, columna)}")
+        elif moda:
+            print(f"\nModa: \n{analisis_estadistico.calcular_moda(data, columna)}")
+        else:
+            pass
+
     elif analisis_estadistico is None:
-        visualizacon_graficas.mostrar_histograma(data, columna)
-        visualizacon_graficas.mostrar_diagrama_barras(data, columna)
+        if histograma:
+            visualizacon_graficas.mostrar_histograma(data, columna)
+        elif diagrama_barras:
+            visualizacon_graficas.mostrar_diagrama_barras(data, columna)
+        else:
+            pass
     else:
         pass
 ```
+
 #### Archivo `run.py`
 ```
 from main import client_code
-from abstract_factory import ConcreteAnalisisFactory, ConcreteGraficasFactory
+from concrete_analisis_factory import ConcreteAnalisisFactory
+from concrete_graficas_factory import ConcreteGraficasFactory
 
 
 if __name__ == "__main__":    
     
     print('Analizamos las activaciones por día.')
 
-    print("Client: Testing la factoría de Análisis Estadísticos:")
-    client_code(ConcreteAnalisisFactory())
+    # Sólo calculamos la media de las activaciones por día y sólo dibujamos el histograma
+    client_code(ConcreteAnalisisFactory(), media = True)
+    client_code(ConcreteGraficasFactory(), histograma = True)
 
-    print("\nClient: Testing la factoría de Visualización de Datos:")
-    client_code(ConcreteGraficasFactory())
     print("Las gráficas se han guardado en la carpeta graficas.")
+```
+
+#### Archivo `abstract_factory.py`
+```
+from __future__ import annotations
+from abc import ABC, abstractmethod
+from abstract_analisis import AbstractAnalisis
+from abstract_grafica import AbstractGrafica
+
+class AbstractFactory(ABC):
+
+    def __init__(self):
+        pass
+
+    @abstractmethod
+    def crear_analisis_estadistico(self) -> AbstractAnalisis:
+        pass
+
+    @abstractmethod
+    def crear_graficas(self) -> AbstractGrafica:
+        pass
+```
+
+#### Archivo `abstract_analisis.py`
+```
+from abc import ABC, abstractmethod
+
+class AbstractAnalisis(ABC):
+    
+    @abstractmethod
+    def calcular_media(self, data, columna):
+        pass
+    
+    def calcular_mediana(self, data, columna):
+        pass
+
+    def calcular_moda(self, data, columna):
+        pass
+```
+
+#### Archivo `abstract_grafica.py`
+```
+from abc import ABC, abstractmethod
+
+class AbstractGrafica(ABC):
+    
+    @abstractmethod
+    def mostrar_histograma(self, data, columna):
+        pass
+
+    def mostrar_diagrama_barras(self, data, columna):
+        pass
+```
+
+#### Archivo `concrete_analisis_factory.py`
+```
+from abstract_factory import AbstractFactory
+from abstract_analisis import AbstractAnalisis
+from abstract_grafica import AbstractGrafica
+from analisis import Analisis
+
+class ConcreteAnalisisFactory(AbstractFactory):
+
+    def crear_analisis_estadistico(self) -> AbstractAnalisis:
+        return Analisis()
+
+    def crear_graficas(self) -> AbstractGrafica:
+        return None # No se implementa en este caso
+```
+
+#### Archivo `concrete_graficas_factory.py`
+```
+from abstract_factory import AbstractFactory
+from abstract_analisis import AbstractAnalisis
+from abstract_grafica import AbstractGrafica
+from grafica import Grafica
+
+class ConcreteGraficasFactory(AbstractFactory):
+
+    def crear_analisis_estadistico(self) -> AbstractAnalisis:
+        return None # No se implementa en este caso
+
+    def crear_graficas(self) -> AbstractGrafica:
+        return Grafica()
+```
+
+#### Archivo `analisis.py`
+```
+from abstract_analisis import AbstractAnalisis
+
+class Analisis(AbstractAnalisis):
+
+    def calcular_media(self, data, columna):
+        val = data[columna]
+        if data[columna].dtypes == 'datetime64[ns]' or data[columna].dtypes == 'M8[ns]':
+            val = data.groupby(data[columna].dt.date).size()
+        return val.mean()
+
+    def calcular_mediana(self, data, columna):
+        val = data[columna]
+        if data[columna].dtypes == 'datetime64[ns]' or data[columna].dtypes == 'M8[ns]':
+            val = data.groupby(data[columna].dt.date).size()
+        return val.median()
+
+    def calcular_moda(self, data, columna):
+        val = data[columna]
+        if data[columna].dtypes == 'datetime64[ns]' or data[columna].dtypes == 'M8[ns]':
+            val = data.groupby(data[columna].dt.date).size()
+        mode_val = val.value_counts()
+        return mode_val.idxmax()
+```
+
+#### Archivo `grafica.py`
+```
+from abstract_grafica import AbstractGrafica    
+import matplotlib.pyplot as plt
+
+class Grafica(AbstractGrafica):
+
+    def mostrar_histograma(self, data, columna):
+        val = data[columna]
+        if data[columna].dtypes == 'datetime64[ns]' or data[columna].dtypes == 'M8[ns]':
+            val = data.groupby(data[columna].dt.date).size()
+        val.plot(kind='hist')
+        plt.savefig('Patrones Creacionales/Ejercicio 1/graficas/histograma.png')
+
+    def mostrar_diagrama_barras(self, data, columna):
+        val = data[columna]
+        if data[columna].dtypes == 'datetime64[ns]' or data[columna].dtypes == 'M8[ns]':
+            val = data.groupby(data[columna].dt.date).size()
+        val.plot(kind='bar')
+        plt.savefig('Patrones Creacionales/Ejercicio 1/graficas/diagramabarras.png')
 ```
