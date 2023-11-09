@@ -66,12 +66,26 @@ Encontramos todos los archivos en una carpeta llamada `Patrones Creacionales`, d
     - `analisis.py`
     - `grafica.py`
 
-   > ¿Por qué empleamos el patrón Abstract Factory para este ejercicio?\\
-   > El patrón Abstract Factory se puede utilizar en este escenario para proporcionar una estructura flexible y escalable para la generación de análisis y representaciones de datos. Dado que se requieren diferentes tipos de análisis y representaciones, el patrón Abstract Factory puede ayudar a crear familias de objetos relacionados sin especificar sus clases concretas.\\
-   > Al utilizar el patrón Abstract Factory en este caso, puedes modularizar el proceso de generación de análisis y representaciones, lo que facilita la incorporación de nuevos tipos de análisis o representaciones en el futuro sin alterar el código existente. Esto mejora la mantenibilidad y la flexibilidad del programa en general.\\
+   > ¿Por qué empleamos el patrón Abstract Factory para este ejercicio?\
+   > El patrón Abstract Factory se puede utilizar en este escenario para proporcionar una estructura flexible y escalable para la generación de análisis y representaciones de datos. Dado que se requieren diferentes tipos de análisis y representaciones, el patrón Abstract Factory puede ayudar a crear familias de objetos relacionados sin especificar sus clases concretas.\
+   > Al utilizar el patrón Abstract Factory en este caso, puedes modularizar el proceso de generación de análisis y representaciones, lo que facilita la incorporación de nuevos tipos de análisis o representaciones en el futuro sin alterar el código existente. Esto mejora la mantenibilidad y la flexibilidad del programa en general.\
    > Además, dado que el programa necesita realizar múltiples tareas como la lectura de datos, el modelado de datos y la generación de diferentes tipos de análisis y representaciones, el uso del patrón Abstract Factory puede ayudar a mantener una estructura clara y organizada en el código, lo que facilita su comprensión y mantenimiento a largo plazo.
     
-- Carpeta `Ejercicio 2`
+- Carpeta `Ejercicio 2`:
+  - Carpeta `data`, donde almacenamos las pizzas generadas por el cliente en un archivo CSV.
+  - Carpeta `img` que guarda las imágenes empleadas posteriormente para la interfaz gráfica de usuario (GUI).
+  - Algunos de los archivos restantes forman conjuntamente un código que construyen el patrón conocido como Builder. Además, incluimos el archivo `main_terminal.py` que une el código del patrón en un único archivo. Los archivos del patrón son los siguientes:
+    - `director.py`
+    - `builder.py`
+    - `pizza_builder.py`
+    - `pizza.py`
+     En estos archivos también empleamos `config.py` para limpiar la consola cuando lo indiquemos.
+  - También encontramos un archivo llamado `gui.py` en el cual desarrollamos una aplicación con la biblioteca Tkinter y la ejecutamos en el fichero `main_tkinter.py`
+
+  
+  > ¿Por qué empleamos el patrón Builder para este ejercicio?\
+  
+
 
 ## Código
 
