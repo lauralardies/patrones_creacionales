@@ -96,7 +96,7 @@ Encontramos todos los archivos en una carpeta llamada `Patrones Creacionales`, d
   > 4. **Estructura clara y modular:** El uso del patrón Builder puede proporcionar una estructura clara y modular para la construcción de pizzas personalizadas, lo que facilita el mantenimiento y la comprensión del código a largo plazo.\
   > 5. **Recomendaciones dinámicas:** El sistema de recomendaciones basado en las elecciones previas del cliente puede integrarse fácilmente con el patrón Builder para sugerir ingredientes, técnicas de cocción y maridajes adecuados.\
   > 6. **Separación de preocupaciones:** El patrón Builder permite separar la lógica de construcción de pizza del código de la interfaz de usuario, lo que mejora la claridad y la mantenibilidad del código.\
-  > En resumen, el patrón Builder sería útil en este escenario para facilitar la creación de pizzas personalizadas, asegurando la validación de selecciones, la flexibilidad y la modularidad del sistema, así como la implementación de recomendaciones dinámicas basadas en las elecciones de los clientes.
+  >En resumen, el patrón Builder sería útil en este escenario para facilitar la creación de pizzas personalizadas, asegurando la validación de selecciones, la flexibilidad y la modularidad del sistema, así como la implementación de recomendaciones dinámicas basadas en las elecciones de los clientes.
 
 ## Código
 
