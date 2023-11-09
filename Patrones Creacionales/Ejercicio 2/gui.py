@@ -130,13 +130,28 @@ def pagina_extras(root):
 
     # Aquí puedes agregar elementos como casillas de verificación para los extras
 
-    siguiente_btn = ttk.Button(pagina_extras, text="Finalizar",
-                             command=lambda: ir_siguiente_pagina(pagina_extras, pagina_inicio))
+    siguiente_btn = ttk.Button(pagina_extras, text="Siguiente",
+                             command=lambda: ir_siguiente_pagina(pagina_extras, pagina_final))
     siguiente_btn.pack(pady=20)
 
     boton_atras(pagina_extras, pagina_maridaje)
 
     return pagina_extras
+
+def pagina_final(root):
+    pagina_final = tk.Frame(root)
+    final_lb = tk.Label(pagina_final, text="¡Gracias por personalizar tu pizza!")
+    final_lb.pack(padx=20, pady=20)
+
+    # Aquí puedes agregar elementos como etiquetas para mostrar el resumen de la pizza
+
+    siguiente_btn = ttk.Button(pagina_final, text="Finalizar",
+                             command=lambda: ir_siguiente_pagina(pagina_final, pagina_inicio))
+    siguiente_btn.pack(pady=20)
+
+    boton_atras(pagina_final, pagina_extras)
+
+    return pagina_final
 
 if __name__ == "__main__":
     root = tk.Tk()
@@ -150,6 +165,7 @@ if __name__ == "__main__":
     pagina_presentacion = pagina_presentacion(root)
     pagina_maridaje = pagina_maridaje(root)
     pagina_extras = pagina_extras(root)
+    pagina_final = pagina_final(root)
 
     pagina_inicio.pack()
 
