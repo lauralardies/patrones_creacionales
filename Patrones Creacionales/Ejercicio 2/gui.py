@@ -252,6 +252,7 @@ def pagina_extras(root):
         extras_vars.append((extra, var))
         c.configure(command=lambda checkbutton=c, var=var: cambiar_color(checkbutton, var.get()))
 
+
     siguiente_btn = ttk.Button(pagina_extras, text="Siguiente",
                              command=lambda: ir_a_pagina(pagina_extras, pagina_final))
     siguiente_btn.pack(pady=20)
