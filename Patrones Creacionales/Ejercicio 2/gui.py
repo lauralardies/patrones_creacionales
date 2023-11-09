@@ -5,6 +5,13 @@ root = tk.Tk()
 root.geometry("1100x700")
 root.title("Pizzería DELIZIOSO")
 
+def pagina_inicio():
+    inicio_frame = tk.Frame(main_frame)
+
+    titulo = tk.Label(inicio_frame, text="Bienvenido a la pizzería\n\nDELIZIOSO", fg='red', bg='#e6e6e6', font=('Arial', 40, 'bold'))
+    titulo.pack()
+
+    inicio_frame.pack()
 
 def quitar_indicador():
     inicio_indicador.config(bg="#c2c2c2")
@@ -17,13 +24,14 @@ def quitar_indicador():
     paso7_indicador.config(bg="#c2c2c2")
     paso8_indicador.config(bg="#c2c2c2")
 
-def indicar(lb):
+def indicar(lb, pagina):
     quitar_indicador()
     lb.config(bg='#9b9b9b')
+    pagina()
 
 opciones_frame = tk.Frame(root, bg='#c2c2c2')
 
-inicio_btn = tk.Button(opciones_frame, text="Inicio", width=20, height=2, bg='#c2c2c2', font=('Arial', 12, 'bold'), command=lambda: indicar(inicio_indicador))
+inicio_btn = tk.Button(opciones_frame, text="Inicio", width=20, height=2, bg='#c2c2c2', font=('Arial', 12, 'bold'), command=lambda: indicar(inicio_indicador, pagina_inicio))
 inicio_btn.place(x=30, y=100)
 inicio_indicador = tk.Label(opciones_frame, text="", bg='#c2c2c2', font=('Arial', 12, 'bold'))
 inicio_indicador.place(x=15, y=100, width=10, height=50)
