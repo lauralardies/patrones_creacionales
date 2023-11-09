@@ -12,10 +12,18 @@ def ir_a_pagina(pagina_actual, pagina_deseada):
     pagina_actual.pack_forget()
     pagina_deseada.pack()
 
+
 def boton_atras(pagina, pagina_anterior):
     atras_btn = ttk.Button(pagina, text="Atrás",
                             command=lambda: ir_a_pagina(pagina, pagina_anterior))
     atras_btn.pack(pady=20)
+
+
+def cambiar_color(checkbutton, seleccionado):
+    if seleccionado:
+        checkbutton.configure(foreground="white", background="green")
+    else:
+        checkbutton.configure(foreground="black", background="SystemButtonFace")
 
 
 def pagina_inicio(root):
@@ -117,6 +125,8 @@ def pagina_ingredientes(root):
         c = ttk.Checkbutton(pagina_ingredientes, text=ingrediente, variable=var)
         c.pack(anchor='w')
         ingredientes_vars.append((ingrediente, var))
+        c.configure(command=lambda checkbutton=c, var=var: cambiar_color(checkbutton, var.get()))
+
 
     siguiente_btn = ttk.Button(pagina_ingredientes, text="Siguiente",
                              command=lambda: ir_a_pagina(pagina_ingredientes, pagina_coccion))
@@ -240,6 +250,7 @@ def pagina_extras(root):
         c = ttk.Checkbutton(pagina_extras, text=extra, variable=var)
         c.pack(anchor='w')
         extras_vars.append((extra, var))
+        c.configure(command=lambda checkbutton=c, var=var: cambiar_color(checkbutton, var.get()))
 
     siguiente_btn = ttk.Button(pagina_extras, text="Siguiente",
                              command=lambda: ir_a_pagina(pagina_extras, pagina_final))
