@@ -1,7 +1,6 @@
 from builder import Builder
 from pizza import Pizza
 
-
 class PizzaBuilder(Builder):
 
     def __init__(self) -> None:
@@ -24,7 +23,7 @@ class PizzaBuilder(Builder):
                 self._pizza.agregar(opcion)
                 break
             else:
-                print("Opción no valida")
+                print("Opción no valida\n")
 
     def salsa(self) -> None:
         while True:
@@ -34,18 +33,19 @@ class PizzaBuilder(Builder):
                 self._pizza.agregar(opcion)
                 break
             else:
-                print("Opción no valida")
+                print("Opción no valida\n")
 
     def ingredientes(self) -> None:
         # Primero hacemos una recomendación basada en las opciones seleccionadas hasta ahora.
-        if self.masa == "Masa tradicional" and self.salsa == "Salsa de tomate":
+        if self._pizza.partes[0] == "Masa tradicional" and self._pizza.partes[1] == "Salsa de tomate":
             print("Le recomendamos agregar jamón y queso")
-        elif self.masa == "Masa integral" and self.salsa == "Salsa barbacoa":
+        elif self._pizza.partes[0] == "Masa integral" and self._pizza.partes[1] == "Salsa barbacoa":
             print("Le recomendamos agregar bacon y cebolla")
-        elif self.masa == "Masa sin gluten" and self.salsa == "Salsa carbonara":
+        elif self._pizza.partes[0] == "Masa sin gluten" and self._pizza.partes[1] == "Salsa carbonara":
             print("Le recomendamos agregar piña y carne picada")
         else:
             print("No hay recomendaciones de ingredientes")
+        # Luego le pedimos que seleccione los ingredientes.
         while True:
             print("Seleccione los ingredientes separados por comas: \n- Jamon\n- Queso\n- Bacon\n- Cebolla\n- Pimiento\n- Piña\n- Carne picada\n- Pollo\n- Atun\n- Tomate\n- Aceitunas\n- Maiz\n- Champiñones\n- Anchoas\n- Salami\n- Pimiento picante\n- Rucula\n- Salsa barbacoa\n- Salsa carbonara\n")
             opciones = input(">> ").split(", ")
@@ -59,7 +59,7 @@ class PizzaBuilder(Builder):
                 self._pizza.agregar(opciones)
                 break
             else:
-                print("Hay alguna opción no válida, vuelva a intentarlo")
+                print("Hay alguna opción no válida, vuelva a intentarlo\n")
 
     def coccion(self) -> None:
         while True:
@@ -69,7 +69,7 @@ class PizzaBuilder(Builder):
                 self._pizza.agregar(opcion)
                 break
             else:
-                print("Opción no valida")
+                print("Opción no valida\n")
 
     def presentacion(self) -> None:
         while True:
@@ -79,31 +79,27 @@ class PizzaBuilder(Builder):
                 self._pizza.agregar(opcion)
                 break
             else:
-                print("Opción no valida")
+                print("Opción no valida\n")
 
     def maridajes(self) -> None:
-        if self.masa == "Masa tradicional" and self.salsa == "Salsa de tomate" and self.ingredientes == ["Jamon", "Queso"]:
+        # Primero hacemos una recomendación basada en las opciones seleccionadas hasta ahora.
+        if self._pizza.partes[0] == "Masa tradicional" and self._pizza.partes[1] == "Salsa de tomate" and self._pizza.partes[2] == ["Jamon", "Queso"]:
             print("Maridaje recomendado: Vino tinto")
-        elif self.masa == "Masa integral" and self.salsa == "Salsa barbacoa" and self.ingredientes == ["Bacon", "Cebolla"]:
+        elif self._pizza.partes[0] == "Masa integral" and self._pizza.partes[1] == "Salsa barbacoa" and self._pizza.partes[2] == ["Bacon", "Cebolla"]:
             print("Maridaje recomendado: Vino blanco") 
-        elif self.masa == "Masa sin gluten" and self.salsa == "Salsa carbonara" and self.ingredientes == ["Piña", "Carne picada"]: 
+        elif self._pizza.partes[0] == "Masa sin gluten" and self._pizza.partes[1] == "Salsa carbonara" and self._pizza.partes[2] == ["Piña", "Carne picada"]: 
             print("Maridaje recomendado: Cerveza sin gluten")
         else:
             print("No hay maridaje recomendado")
+        # Luego le pedimos que seleccione los maridajes.
         while True:
-            print("Seleccione los maridajes separados por comas: \n- Vino tinto\n- Vino blanco\n- Cerveza\n- Cerveza sin gluten\n- Refresco\n- Agua\n- None\n")
-            opciones = input(">> ").split(", ")
-            no_validas = []
-            for opcion in opciones:
-                if opcion not in ["Vino tinto", "Vino blanco", "Cerveza", "Cerveza sin gluten", "Refresco", "Agua", "None"]:
-                    no_validas.append(opcion)
-                else:
-                    pass
-            if len(no_validas) == 0:
-                self._pizza.agregar(opciones)
+            print("Seleccione un maridajes para acompañar: \n- Vino tinto\n- Vino blanco\n- Cerveza\n- Cerveza sin gluten\n- Refresco\n- Agua\n- None\n")
+            opcion = input(">> ")
+            if opcion in ["Vino tinto", "Vino blanco", "Cerveza", "Cerveza sin gluten", "Refresco", "Agua", "None"]:
+                self._pizza.agregar(opcion)
                 break
             else:
-                print("Hay alguna opción no válida, vuelva a intentarlo")
+                print("Opción no válida\n")
 
     def extras(self) -> None:
         while True:
@@ -119,4 +115,4 @@ class PizzaBuilder(Builder):
                 self._pizza.agregar(opciones)
                 break
             else:
-                print("Hay alguna opción no válida, vuelva a intentarlo")
+                print("Hay alguna opción no válida, vuelva a intentarlo\n")
