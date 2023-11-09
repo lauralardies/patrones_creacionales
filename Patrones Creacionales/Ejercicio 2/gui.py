@@ -7,18 +7,16 @@ def boton_salir(pagina):
     exit_button = ttk.Button(pagina, text="Salir", command=root.quit)
     exit_button.pack(pady=20)
 
-def ir_siguiente_pagina(pagina_actual, siguiente_pagina):
-    pagina_actual.pack_forget()
-    siguiente_pagina.pack()
 
-def ir_pagina_anterior(pagina_actual, pagina_anterior):
+def ir_a_pagina(pagina_actual, pagina_deseada):
     pagina_actual.pack_forget()
-    pagina_anterior.pack()
+    pagina_deseada.pack()
 
 def boton_atras(pagina, pagina_anterior):
     atras_btn = ttk.Button(pagina, text="Atrás",
-                            command=lambda: ir_pagina_anterior(pagina, pagina_anterior))
+                            command=lambda: ir_a_pagina(pagina, pagina_anterior))
     atras_btn.pack(pady=20)
+
 
 def pagina_inicio(root):
     pagina_inicio = tk.Frame(root)
@@ -26,42 +24,65 @@ def pagina_inicio(root):
     inicio_lb.pack(padx=20, pady=20)
 
     comenzar_btn = ttk.Button(pagina_inicio, text="Empieza a preparar tu pizza",
-                              command=lambda: ir_siguiente_pagina(pagina_inicio, pagina_masa))
+                              command=lambda: ir_a_pagina(pagina_inicio, pagina_masa))
     comenzar_btn.pack(pady=20)
 
     boton_salir(pagina_inicio)
 
     return pagina_inicio
 
-def pagina_masa(root):
+
+def pagina_masa(root, tipo_masa="Masa tradicional"):
     pagina_masa = tk.Frame(root)
     masa_lb = tk.Label(pagina_masa, text="Elige tu tipo de masa:")
     masa_lb.pack(padx=20, pady=20)
 
-    # Aquí puedes agregar elementos como botones de radio para los tipos de masa
+    opciones = [
+        ("Masa tradicional", "Masa tradicional"),
+        ("Masa integral", "Masa integral"),
+        ("Masa sin gluten", "Masa sin gluten")
+    ]
+
+    masa_var = tk.StringVar()
+    masa_var.set(tipo_masa)
+
+    for text, masa in opciones:
+        tk.Radiobutton(pagina_masa, text=text, variable=masa_var, value=masa).pack(anchor="w")
 
     siguiente_btn = ttk.Button(pagina_masa, text="Siguiente",
-                             command=lambda: ir_siguiente_pagina(pagina_masa, pagina_salsa))
+                             command=lambda: ir_a_pagina(pagina_masa, pagina_salsa))
     siguiente_btn.pack(pady=20)
 
     boton_atras(pagina_masa, pagina_inicio)
 
     return pagina_masa
 
-def pagina_salsa(root):
+
+def pagina_salsa(root, tipo_salsa="Salsa de tomate"):
     pagina_salsa = tk.Frame(root)
     salsa_lb = tk.Label(pagina_salsa, text="Selecciona tu salsa:")
     salsa_lb.pack(padx=20, pady=20)
 
-    # Aquí puedes agregar elementos como botones de radio para las salsas
+    opciones = [
+        ("Salsa de tomate", "Salsa de tomate"),
+        ("Salsa barbacoa", "Salsa barbacoa"),
+        ("Salsa carbonara", "Salsa carbonara")
+    ]
+
+    salsa_var = tk.StringVar()
+    salsa_var.set(tipo_salsa)
+
+    for text, salsa in opciones:
+        tk.Radiobutton(pagina_salsa, text=text, variable=salsa_var, value=salsa).pack(anchor="w")
 
     siguiente_btn = ttk.Button(pagina_salsa, text="Siguiente",
-                             command=lambda: ir_siguiente_pagina(pagina_salsa, pagina_ingredientes))
+                             command=lambda: ir_a_pagina(pagina_salsa, pagina_ingredientes))
     siguiente_btn.pack(pady=20)
 
     boton_atras(pagina_salsa, pagina_masa)
 
     return pagina_salsa
+
 
 def pagina_ingredientes(root):
     pagina_ingredientes = tk.Frame(root)
@@ -71,57 +92,95 @@ def pagina_ingredientes(root):
     # Aquí puedes agregar elementos como casillas de verificación para los ingredientes
 
     siguiente_btn = ttk.Button(pagina_ingredientes, text="Siguiente",
-                             command=lambda: ir_siguiente_pagina(pagina_ingredientes, pagina_coccion))
+                             command=lambda: ir_a_pagina(pagina_ingredientes, pagina_coccion))
     siguiente_btn.pack(pady=20)
 
     boton_atras(pagina_ingredientes, pagina_salsa)
 
     return pagina_ingredientes
 
-def pagina_coccion(root):
+
+def pagina_coccion(root, tipo_coccion="Horno de leña"):
     pagina_coccion = tk.Frame(root)
     coccion_lb = tk.Label(pagina_coccion, text="Selecciona el método de cocción:")
     coccion_lb.pack(padx=20, pady=20)
 
-    # Aquí puedes agregar elementos como botones de radio para los métodos de cocción
+    opciones = [
+        ("Horno de leña", "Horno de leña"),
+        ("Horno electrico", "Horno electrico"),
+        ("Horno de gas", "Horno de gas")
+    ]
+
+    coccion_var = tk.StringVar()
+    coccion_var.set(tipo_coccion)
+
+    for text, coccion in opciones:
+        tk.Radiobutton(pagina_coccion, text=text, variable=coccion_var, value=coccion).pack(anchor="w")
 
     siguiente_btn = ttk.Button(pagina_coccion, text="Siguiente",
-                             command=lambda: ir_siguiente_pagina(pagina_coccion, pagina_presentacion))
+                             command=lambda: ir_a_pagina(pagina_coccion, pagina_presentacion))
     siguiente_btn.pack(pady=20)
 
     boton_atras(pagina_coccion, pagina_ingredientes)
 
     return pagina_coccion
 
-def pagina_presentacion(root):
+
+def pagina_presentacion(root, tipo_presentacion="Pizza entera"):
     pagina_presentacion = tk.Frame(root)
     presentacion_lb = tk.Label(pagina_presentacion, text="Elige la presentación de la pizza:")
     presentacion_lb.pack(padx=20, pady=20)
 
-    # Aquí puedes agregar elementos como botones de radio para las opciones de presentación
+    opciones = [
+        ("Pizza entera", "Pizza entera"),
+        ("Pizza por raciones", "Pizza por raciones")
+    ]
+
+    presentacion_var = tk.StringVar()
+    presentacion_var.set(tipo_presentacion)
+
+    for text, presentacion in opciones:
+        tk.Radiobutton(pagina_presentacion, text=text, variable=presentacion_var, value=presentacion).pack(anchor="w")
 
     siguiente_btn = ttk.Button(pagina_presentacion, text="Siguiente",
-                             command=lambda: ir_siguiente_pagina(pagina_presentacion, pagina_maridaje))
+                             command=lambda: ir_a_pagina(pagina_presentacion, pagina_maridaje))
     siguiente_btn.pack(pady=20)
 
     boton_atras(pagina_presentacion, pagina_coccion)
 
     return pagina_presentacion
 
-def pagina_maridaje(root):
+
+def pagina_maridaje(root, tipo_bebida="None"):
     pagina_maridaje = tk.Frame(root)
     maridaje_lb = tk.Label(pagina_maridaje, text="Selecciona tus bebidas:")
     maridaje_lb.pack(padx=20, pady=20)
 
-    # Aquí puedes agregar elementos como casillas de verificación para las bebidas
+    opciones = [
+        ("Vino tinto", "Vino tinto"),
+        ("Vino blanco", "Vino blanco"),
+        ("Cerveza", "Cerveza"),
+        ("Cerveza sin gluten", "Cerveza sin gluten"),
+        ("Refresco", "Refresco"),
+        ("Agua", "Agua"),
+        ("None", "None")
+    ]
+
+    bebida_var = tk.StringVar()
+    bebida_var.set(tipo_bebida)
+
+    for text, bebida in opciones:
+        tk.Radiobutton(pagina_maridaje, text=text, variable=bebida_var, value=bebida).pack(anchor="w")
+
 
     siguiente_btn = ttk.Button(pagina_maridaje, text="Siguiente",
-                             command=lambda: ir_siguiente_pagina(pagina_maridaje, pagina_extras))
+                             command=lambda: ir_a_pagina(pagina_maridaje, pagina_extras))
     siguiente_btn.pack(pady=20)
 
     boton_atras(pagina_maridaje, pagina_presentacion)
 
     return pagina_maridaje
+
 
 def pagina_extras(root):
     pagina_extras = tk.Frame(root)
@@ -131,12 +190,13 @@ def pagina_extras(root):
     # Aquí puedes agregar elementos como casillas de verificación para los extras
 
     siguiente_btn = ttk.Button(pagina_extras, text="Siguiente",
-                             command=lambda: ir_siguiente_pagina(pagina_extras, pagina_final))
+                             command=lambda: ir_a_pagina(pagina_extras, pagina_final))
     siguiente_btn.pack(pady=20)
 
     boton_atras(pagina_extras, pagina_maridaje)
 
     return pagina_extras
+
 
 def pagina_final(root):
     pagina_final = tk.Frame(root)
@@ -145,8 +205,15 @@ def pagina_final(root):
 
     # Aquí puedes agregar elementos como etiquetas para mostrar el resumen de la pizza
 
-    siguiente_btn = ttk.Button(pagina_final, text="Finalizar",
-                             command=lambda: ir_siguiente_pagina(pagina_final, pagina_inicio))
+    gusto_lb = tk.Label(pagina_final, text="¿Te gusta la pizza?")
+    gusto_lb.pack(padx=20, pady=20)
+
+    volver_btn = ttk.Button(pagina_final, text="No, comenzar de nuevo", 
+                             command=lambda: ir_a_pagina(pagina_final, pagina_masa))
+    volver_btn.pack(pady=20)
+
+    siguiente_btn = ttk.Button(pagina_final, text="Sí, finalizar",
+                             command=lambda: ir_a_pagina(pagina_final, pagina_inicio))
     siguiente_btn.pack(pady=20)
 
     boton_atras(pagina_final, pagina_extras)
