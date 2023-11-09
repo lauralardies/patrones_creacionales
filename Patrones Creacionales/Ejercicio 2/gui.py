@@ -1,97 +1,134 @@
 import tkinter as tk
+from tkinter import ttk
 
-root = tk.Tk()
+def ir_siguiente_pagina(pagina_actual, siguiente_pagina):
+    pagina_actual.pack_forget()
+    siguiente_pagina.pack()
 
-root.geometry("1100x700")
-root.title("Pizzería DELIZIOSO")
+def ir_pagina_anterior(pagina_actual, pagina_anterior):
+    pagina_actual.pack_forget()
+    pagina_anterior.pack()
 
-def pagina_inicio():
-    inicio_frame = tk.Frame(main_frame)
+def boton_atras(pagina, pagina_anterior):
+    atras_btn = ttk.Button(pagina, text="Atrás",
+                            command=lambda: ir_pagina_anterior(pagina, pagina_anterior))
+    atras_btn.pack(pady=20)
 
-    titulo = tk.Label(inicio_frame, text="Bienvenido a la pizzería\n\nDELIZIOSO", fg='red', bg='#e6e6e6', font=('Arial', 40, 'bold'))
-    titulo.pack()
+def pagina_inicio(root):
+    pagina_inicio = tk.Frame(root)
+    inicio_lb = tk.Label(pagina_inicio, text="¡Bienvenido a la personalización de pizza!")
+    inicio_lb.pack(padx=20, pady=20)
 
-    inicio_frame.pack()
+    comenzar_btn = ttk.Button(pagina_inicio, text="Empieza a preparar tu pizza",
+                              command=lambda: ir_siguiente_pagina(pagina_inicio, pagina_masa))
+    comenzar_btn.pack(pady=20)
 
-def quitar_indicador():
-    inicio_indicador.config(bg="#c2c2c2")
-    paso1_indicador.config(bg="#c2c2c2")
-    paso2_indicador.config(bg="#c2c2c2")
-    paso3_indicador.config(bg="#c2c2c2")
-    paso4_indicador.config(bg="#c2c2c2")
-    paso5_indicador.config(bg="#c2c2c2")
-    paso6_indicador.config(bg="#c2c2c2")
-    paso7_indicador.config(bg="#c2c2c2")
-    paso8_indicador.config(bg="#c2c2c2")
+    return pagina_inicio
 
-def indicar(lb, pagina):
-    quitar_indicador()
-    lb.config(bg='#9b9b9b')
-    pagina()
+def pagina_masa(root):
+    pagina_masa = tk.Frame(root)
+    masa_lb = tk.Label(pagina_masa, text="Elige tu tipo de masa:")
+    masa_lb.pack(padx=20, pady=20)
 
-opciones_frame = tk.Frame(root, bg='#c2c2c2')
+    # Aquí puedes agregar elementos como botones de radio para los tipos de masa
 
-inicio_btn = tk.Button(opciones_frame, text="Inicio", width=20, height=2, bg='#c2c2c2', font=('Arial', 12, 'bold'), command=lambda: indicar(inicio_indicador, pagina_inicio))
-inicio_btn.place(x=30, y=100)
-inicio_indicador = tk.Label(opciones_frame, text="", bg='#c2c2c2', font=('Arial', 12, 'bold'))
-inicio_indicador.place(x=15, y=100, width=10, height=50)
+    siguiente_btn = ttk.Button(pagina_masa, text="Siguiente",
+                             command=lambda: ir_siguiente_pagina(pagina_masa, pagina_salsa))
+    siguiente_btn.pack(pady=20)
 
+    return pagina_masa
 
-paso1_btn = tk.Button(opciones_frame, text="Paso 1", width=20, height=2, bg='#c2c2c2', font=('Arial', 12, 'bold'), command=lambda: indicar(paso1_indicador))
-paso1_btn.place(x=30, y=155)
-paso1_indicador = tk.Label(opciones_frame, text="", bg='#c2c2c2', font=('Arial', 12, 'bold'))
-paso1_indicador.place(x=15, y=155, width=10, height=50)
+def pagina_salsa(root):
+    pagina_salsa = tk.Frame(root)
+    salsa_lb = tk.Label(pagina_salsa, text="Selecciona tu salsa:")
+    salsa_lb.pack(padx=20, pady=20)
 
+    # Aquí puedes agregar elementos como botones de radio para las salsas
 
-paso2_btn = tk.Button(opciones_frame, text="Paso 2", width=20, height=2, bg='#c2c2c2', font=('Arial', 12, 'bold'), command=lambda: indicar(paso2_indicador))
-paso2_btn.place(x=30, y=210)
-paso2_indicador = tk.Label(opciones_frame, text="", bg='#c2c2c2', font=('Arial', 12, 'bold'))
-paso2_indicador.place(x=15, y=210, width=10, height=50)
+    siguiente_btn = ttk.Button(pagina_salsa, text="Siguiente",
+                             command=lambda: ir_siguiente_pagina(pagina_salsa, pagina_ingredientes))
+    siguiente_btn.pack(pady=20)
 
+    return pagina_salsa
 
-paso3_btn = tk.Button(opciones_frame, text="Paso 3", width=20, height=2, bg='#c2c2c2', font=('Arial', 12, 'bold'), command=lambda: indicar(paso3_indicador))
-paso3_btn.place(x=30, y=265)
-paso3_indicador = tk.Label(opciones_frame, text="", bg='#c2c2c2', font=('Arial', 12, 'bold'))
-paso3_indicador.place(x=15, y=265, width=10, height=50)
+def pagina_ingredientes(root):
+    pagina_ingredientes = tk.Frame(root)
+    ingredientes_lb = tk.Label(pagina_ingredientes, text="Elige tus ingredientes:")
+    ingredientes_lb.pack(padx=20, pady=20)
 
+    # Aquí puedes agregar elementos como casillas de verificación para los ingredientes
 
-paso4_btn = tk.Button(opciones_frame, text="Paso 4", width=20, height=2, bg='#c2c2c2', font=('Arial', 12, 'bold'), command=lambda: indicar(paso4_indicador))
-paso4_btn.place(x=30, y=320)
-paso4_indicador = tk.Label(opciones_frame, text="", bg='#c2c2c2', font=('Arial', 12, 'bold'))
-paso4_indicador.place(x=15, y=320, width=10, height=50)
+    siguiente_btn = ttk.Button(pagina_ingredientes, text="Siguiente",
+                             command=lambda: ir_siguiente_pagina(pagina_ingredientes, pagina_coccion))
+    siguiente_btn.pack(pady=20)
 
+    return pagina_ingredientes
 
-paso5_btn = tk.Button(opciones_frame, text="Paso 5", width=20, height=2, bg='#c2c2c2', font=('Arial', 12, 'bold'), command=lambda: indicar(paso5_indicador))
-paso5_btn.place(x=30, y=375)
-paso5_indicador = tk.Label(opciones_frame, text="", bg='#c2c2c2', font=('Arial', 12, 'bold'))
-paso5_indicador.place(x=15, y=375, width=10, height=50)
+def pagina_coccion(root):
+    pagina_coccion = tk.Frame(root)
+    coccion_lb = tk.Label(pagina_coccion, text="Selecciona el método de cocción:")
+    coccion_lb.pack(padx=20, pady=20)
 
+    # Aquí puedes agregar elementos como botones de radio para los métodos de cocción
 
-paso6_btn = tk.Button(opciones_frame, text="Paso 6", width=20, height=2, bg='#c2c2c2', font=('Arial', 12, 'bold'), command=lambda: indicar(paso6_indicador))
-paso6_btn.place(x=30, y=430)
-paso6_indicador = tk.Label(opciones_frame, text="", bg='#c2c2c2', font=('Arial', 12, 'bold'))
-paso6_indicador.place(x=15, y=430, width=10, height=50)
+    siguiente_btn = ttk.Button(pagina_coccion, text="Siguiente",
+                             command=lambda: ir_siguiente_pagina(pagina_coccion, pagina_presentacion))
+    siguiente_btn.pack(pady=20)
 
+    return pagina_coccion
 
-paso7_btn = tk.Button(opciones_frame, text="Paso 7", width=20, height=2, bg='#c2c2c2', font=('Arial', 12, 'bold'), command=lambda: indicar(paso7_indicador))
-paso7_btn.place(x=30, y=485)
-paso7_indicador = tk.Label(opciones_frame, text="", bg='#c2c2c2', font=('Arial', 12, 'bold'))
-paso7_indicador.place(x=15, y=485, width=10, height=50)
+def pagina_presentacion(root):
+    pagina_presentacion = tk.Frame(root)
+    presentacion_lb = tk.Label(pagina_presentacion, text="Elige la presentación de la pizza:")
+    presentacion_lb.pack(padx=20, pady=20)
 
+    # Aquí puedes agregar elementos como botones de radio para las opciones de presentación
 
-paso8_btn = tk.Button(opciones_frame, text="Paso 8", width=20, height=2, bg='#c2c2c2', font=('Arial', 12, 'bold'), command=lambda: indicar(paso8_indicador))
-paso8_btn.place(x=30, y=540)
-paso8_indicador = tk.Label(opciones_frame, text="", bg='#c2c2c2', font=('Arial', 12, 'bold'))
-paso8_indicador.place(x=15, y=540, width=10, height=50)
+    siguiente_btn = ttk.Button(pagina_presentacion, text="Siguiente",
+                             command=lambda: ir_siguiente_pagina(pagina_presentacion, pagina_maridaje))
+    siguiente_btn.pack(pady=20)
 
+    return pagina_presentacion
 
-opciones_frame.pack(side=tk.LEFT)
-opciones_frame.pack_propagate(False)
-opciones_frame.config(width=300, height=700)
+def pagina_maridaje(root):
+    pagina_maridaje = tk.Frame(root)
+    maridaje_lb = tk.Label(pagina_maridaje, text="Selecciona tus bebidas:")
+    maridaje_lb.pack(padx=20, pady=20)
 
-main_frame = tk.Frame(root, bg='#e6e6e6', highlightbackground="black", highlightthickness=1)
-main_frame.pack(side=tk.LEFT)
-main_frame.pack_propagate(False)
-main_frame.config(width=800, height=700)
+    # Aquí puedes agregar elementos como casillas de verificación para las bebidas
 
-root.mainloop()
+    siguiente_btn = ttk.Button(pagina_maridaje, text="Siguiente",
+                             command=lambda: ir_siguiente_pagina(pagina_maridaje, pagina_extras))
+    siguiente_btn.pack(pady=20)
+
+    return pagina_maridaje
+
+def pagina_extras(root):
+    pagina_extras = tk.Frame(root)
+    extras_lb = tk.Label(pagina_extras, text="Agrega extras a tu pizza:")
+    extras_lb.pack(padx=20, pady=20)
+
+    # Aquí puedes agregar elementos como casillas de verificación para los extras
+
+    siguiente_btn = ttk.Button(pagina_extras, text="Finalizar",
+                             command=root.quit)
+    siguiente_btn.pack(pady=20)
+
+    return pagina_extras
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    root.title("Personaliza tu pizza")
+
+    pagina_inicio = pagina_inicio(root)
+    pagina_masa = pagina_masa(root)
+    pagina_salsa = pagina_salsa(root)
+    pagina_ingredientes = pagina_ingredientes(root)
+    pagina_coccion = pagina_coccion(root)
+    pagina_presentacion = pagina_presentacion(root)
+    pagina_maridaje = pagina_maridaje(root)
+    pagina_extras = pagina_extras(root)
+
+    pagina_inicio.pack()
+
+    root.mainloop()
