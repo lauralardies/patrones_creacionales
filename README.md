@@ -21,7 +21,7 @@ Tu tarea es desarrollar un programa en Python que haga uso del patrón de diseñ
    - Una fábrica que genere análisis estadísticos (media, moda, mediana).
    - Una fábrica que produzca visualizaciones gráficas (histogramas, gráficos de barras).
   Cada fábrica debe tener al menos dos productos concretos (e.g., histograma de activaciones por tipo de emergencia, gráfico de barras de activaciones por mes).
-4. Análisis y Representación: Utiliza las fábricas creadas para generar distintos análisis y representaciones de los datos. Muestra la media de activaciones por día, y un histograma de las activaciones
+4. Análisis y Representación: Utiliza las fábricas creadas para generar distintos análisis y representaciones de los datos. Muestra la media de activaciones por día, y un histograma de las activaciones.
 
 
 ### Ejercicio 2
@@ -67,6 +67,11 @@ Encontramos todos los archivos en una carpeta llamada `Patrones Creacionales`, d
     - `grafica.py`
 
    > ¿Por qué empleamos el patrón Abstract Factory para este ejercicio?
+   > El patrón Abstract Factory se puede utilizar en este escenario para proporcionar una estructura flexible y escalable para la generación de análisis y representaciones de datos. Dado que se requieren diferentes tipos de análisis y representaciones, el patrón Abstract Factory puede ayudar a crear familias de objetos relacionados sin especificar sus clases concretas.
+
+   > Al utilizar el patrón Abstract Factory en este caso, puedes modularizar el proceso de generación de análisis y representaciones, lo que facilita la incorporación de nuevos tipos de análisis o representaciones en el futuro sin alterar el código existente. Esto mejora la mantenibilidad y la flexibilidad del programa en general.
+
+   > Además, dado que el programa necesita realizar múltiples tareas como la lectura de datos, el modelado de datos y la generación de diferentes tipos de análisis y representaciones, el uso del patrón Abstract Factory puede ayudar a mantener una estructura clara y organizada en el código, lo que facilita su comprensión y mantenimiento a largo plazo.
     
 - Carpeta `Ejercicio 2`
 
