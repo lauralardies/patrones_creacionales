@@ -89,7 +89,7 @@ Encontramos todos los archivos en una carpeta llamada `Patrones Creacionales`, d
   
   > **¿Por qué empleamos el patrón Builder para este ejercicio?**\
   > En el escenario descrito, el patrón Builder sería adecuado para la implementación del sistema de construcción de pizzas personalizadas. Dado que hay múltiples componentes y pasos involucrados en la creación de una pizza personalizada, el patrón Builder puede facilitar la construcción paso a paso de objetos complejos, como una pizza con todas sus características específicas.\
-  > Aquí hay algunas razones por las cuales sería útil emplear el patrón Builder en este ejercicio:\
+  > Aquí hay algunas razones por las cuales sería útil emplear el patrón Builder en este ejercicio:
   > 1. **Construcción paso a paso:** El patrón Builder permite a los clientes construir su pizza paso a paso, seleccionando cada componente a lo largo del camino.
   > 2. **Validación de selecciones:** El Builder puede asegurar que cada elección sea validada y compatible con las selecciones previas del cliente, evitando combinaciones inválidas.
   > 3. **Flexibilidad y expansión:** El patrón Builder facilita la incorporación de nuevas características o componentes en la construcción de la pizza sin modificar el código existente, lo que garantiza la flexibilidad del sistema.
@@ -153,6 +153,20 @@ data_limpio.to_csv('Patrones Creacionales/Ejercicio 1/data/data_limpio.csv', sep
 from abstract_factory import AbstractFactory
 import pandas as pd
 
+# ¿Por qué empleamos el patrón Abstract Factory para este ejercicio?
+# El patrón Abstract Factory se puede utilizar en este escenario para proporcionar una 
+# estructura flexible y escalable para la generación de análisis y representaciones de datos. 
+# Dado que se requieren diferentes tipos de análisis y representaciones, el patrón Abstract 
+# Factory puede ayudar a crear familias de objetos relacionados sin especificar sus clases 
+# concretas.
+# Al utilizar el patrón Abstract Factory en este caso, puedes modularizar el proceso de 
+# generación de análisis y representaciones, lo que facilita la incorporación de nuevos 
+# tipos de análisis o representaciones en el futuro sin alterar el código existente. Esto 
+# mejora la mantenibilidad y la flexibilidad del programa en general.
+# Además, dado que el programa necesita realizar múltiples tareas como la lectura de datos, 
+# el modelado de datos y la generación de diferentes tipos de análisis y representaciones, 
+# el uso del patrón Abstract Factory puede ayudar a mantener una estructura clara y organizada 
+# en el código, lo que facilita su comprensión y mantenimiento a largo plazo.
 
 def client_code(factory: AbstractFactory, media = False, mediana = False, moda = False, histograma = False, diagrama_barras = False) -> None:
 
