@@ -1,9 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 
-
-
-def boton_salir(pagina):
+def boton_salir(root, pagina):
     exit_button = ttk.Button(pagina, text="Salir", command=root.quit)
     exit_button.pack(pady=20)
 
@@ -26,21 +24,22 @@ def cambiar_color(checkbutton, seleccionado):
         checkbutton.configure(foreground="black", background="SystemButtonFace")
 
 
-def pagina_inicio(root):
+
+def crear_pagina_inicio(root):
     pagina_inicio = tk.Frame(root)
     inicio_lb = tk.Label(pagina_inicio, text="¡Bienvenido a la personalización de pizza!")
     inicio_lb.pack(padx=20, pady=20)
 
     comenzar_btn = ttk.Button(pagina_inicio, text="Empieza a preparar tu pizza",
-                              command=lambda: ir_a_pagina(pagina_inicio, pagina_masa))
+                              command=lambda: ir_a_pagina(pagina_inicio, crear_pagina_masa(root)))
     comenzar_btn.pack(pady=20)
 
-    boton_salir(pagina_inicio)
+    boton_salir(root, pagina_inicio)
 
     return pagina_inicio
 
 
-def pagina_masa(root, tipo_masa="Masa tradicional"):
+def crear_pagina_masa(root, tipo_masa="Masa tradicional"):
     pagina_masa = tk.Frame(root)
     masa_lb = tk.Label(pagina_masa, text="Elige tu tipo de masa:")
     masa_lb.pack(padx=20, pady=20)
@@ -58,15 +57,15 @@ def pagina_masa(root, tipo_masa="Masa tradicional"):
         tk.Radiobutton(pagina_masa, text=text, variable=masa_var, value=masa).pack(anchor="w")
 
     siguiente_btn = ttk.Button(pagina_masa, text="Siguiente",
-                             command=lambda: ir_a_pagina(pagina_masa, pagina_salsa))
+                             command=lambda: ir_a_pagina(pagina_masa, crear_pagina_salsa(root)))
     siguiente_btn.pack(pady=20)
 
-    boton_atras(pagina_masa, pagina_inicio)
+    boton_atras(pagina_masa, crear_pagina_inicio(root))
 
     return pagina_masa
 
 
-def pagina_salsa(root, tipo_salsa="Salsa de tomate"):
+def crear_pagina_salsa(root, tipo_salsa="Salsa de tomate"):
     pagina_salsa = tk.Frame(root)
     salsa_lb = tk.Label(pagina_salsa, text="Selecciona tu salsa:")
     salsa_lb.pack(padx=20, pady=20)
@@ -84,15 +83,15 @@ def pagina_salsa(root, tipo_salsa="Salsa de tomate"):
         tk.Radiobutton(pagina_salsa, text=text, variable=salsa_var, value=salsa).pack(anchor="w")
 
     siguiente_btn = ttk.Button(pagina_salsa, text="Siguiente",
-                             command=lambda: ir_a_pagina(pagina_salsa, pagina_ingredientes))
+                             command=lambda: ir_a_pagina(pagina_salsa, crear_pagina_ingredientes(root)))
     siguiente_btn.pack(pady=20)
 
-    boton_atras(pagina_salsa, pagina_masa)
+    boton_atras(pagina_salsa, crear_pagina_masa(root))
 
     return pagina_salsa
 
 
-def pagina_ingredientes(root):
+def crear_pagina_ingredientes(root):
     pagina_ingredientes = tk.Frame(root)
     ingredientes_lb = tk.Label(pagina_ingredientes, text="Elige tus ingredientes:")
     ingredientes_lb.pack(padx=20, pady=20)
@@ -129,15 +128,15 @@ def pagina_ingredientes(root):
 
 
     siguiente_btn = ttk.Button(pagina_ingredientes, text="Siguiente",
-                             command=lambda: ir_a_pagina(pagina_ingredientes, pagina_coccion))
+                             command=lambda: ir_a_pagina(pagina_ingredientes, crear_pagina_coccion(root)))
     siguiente_btn.pack(pady=20)
 
-    boton_atras(pagina_ingredientes, pagina_salsa)
+    boton_atras(pagina_ingredientes, crear_pagina_salsa(root))
 
     return pagina_ingredientes
 
 
-def pagina_coccion(root, tipo_coccion="Horno de leña"):
+def crear_pagina_coccion(root, tipo_coccion="Horno de leña"):
     pagina_coccion = tk.Frame(root)
     coccion_lb = tk.Label(pagina_coccion, text="Selecciona el método de cocción:")
     coccion_lb.pack(padx=20, pady=20)
@@ -155,15 +154,15 @@ def pagina_coccion(root, tipo_coccion="Horno de leña"):
         tk.Radiobutton(pagina_coccion, text=text, variable=coccion_var, value=coccion).pack(anchor="w")
 
     siguiente_btn = ttk.Button(pagina_coccion, text="Siguiente",
-                             command=lambda: ir_a_pagina(pagina_coccion, pagina_presentacion))
+                             command=lambda: ir_a_pagina(pagina_coccion, crear_pagina_presentacion(root)))
     siguiente_btn.pack(pady=20)
 
-    boton_atras(pagina_coccion, pagina_ingredientes)
+    boton_atras(pagina_coccion, crear_pagina_ingredientes(root))
 
     return pagina_coccion
 
 
-def pagina_presentacion(root, tipo_presentacion="Pizza entera"):
+def crear_pagina_presentacion(root, tipo_presentacion="Pizza entera"):
     pagina_presentacion = tk.Frame(root)
     presentacion_lb = tk.Label(pagina_presentacion, text="Elige la presentación de la pizza:")
     presentacion_lb.pack(padx=20, pady=20)
@@ -180,15 +179,15 @@ def pagina_presentacion(root, tipo_presentacion="Pizza entera"):
         tk.Radiobutton(pagina_presentacion, text=text, variable=presentacion_var, value=presentacion).pack(anchor="w")
 
     siguiente_btn = ttk.Button(pagina_presentacion, text="Siguiente",
-                             command=lambda: ir_a_pagina(pagina_presentacion, pagina_maridaje))
+                             command=lambda: ir_a_pagina(pagina_presentacion, crear_pagina_maridaje(root)))
     siguiente_btn.pack(pady=20)
 
-    boton_atras(pagina_presentacion, pagina_coccion)
+    boton_atras(pagina_presentacion, crear_pagina_coccion(root))
 
     return pagina_presentacion
 
 
-def pagina_maridaje(root, tipo_bebida="None"):
+def crear_pagina_maridaje(root, tipo_bebida="None"):
     pagina_maridaje = tk.Frame(root)
     maridaje_lb = tk.Label(pagina_maridaje, text="Selecciona tus bebidas:")
     maridaje_lb.pack(padx=20, pady=20)
@@ -211,15 +210,15 @@ def pagina_maridaje(root, tipo_bebida="None"):
 
 
     siguiente_btn = ttk.Button(pagina_maridaje, text="Siguiente",
-                             command=lambda: ir_a_pagina(pagina_maridaje, pagina_extras))
+                             command=lambda: ir_a_pagina(pagina_maridaje, crear_pagina_extras(root)))
     siguiente_btn.pack(pady=20)
 
-    boton_atras(pagina_maridaje, pagina_presentacion)
+    boton_atras(pagina_maridaje, crear_pagina_presentacion(root))
 
     return pagina_maridaje
 
 
-def pagina_extras(root):
+def crear_pagina_extras(root):
     pagina_extras = tk.Frame(root)
     extras_lb = tk.Label(pagina_extras, text="Agrega extras a tu pizza:")
     extras_lb.pack(padx=20, pady=20)
@@ -254,50 +253,30 @@ def pagina_extras(root):
 
 
     siguiente_btn = ttk.Button(pagina_extras, text="Siguiente",
-                             command=lambda: ir_a_pagina(pagina_extras, pagina_final))
+                             command=lambda: ir_a_pagina(pagina_extras, crear_pagina_final(root)))
     siguiente_btn.pack(pady=20)
 
-    boton_atras(pagina_extras, pagina_maridaje)
+    boton_atras(pagina_extras, crear_pagina_maridaje(root))
 
     return pagina_extras
 
 
-def pagina_final(root):
+def crear_pagina_final(root):
     pagina_final = tk.Frame(root)
     final_lb = tk.Label(pagina_final, text="¡Gracias por personalizar tu pizza!")
     final_lb.pack(padx=20, pady=20)
-
-    # Aquí puedes agregar elementos como etiquetas para mostrar el resumen de la pizza
 
     gusto_lb = tk.Label(pagina_final, text="¿Te gusta la pizza?")
     gusto_lb.pack(padx=20, pady=20)
 
     volver_btn = ttk.Button(pagina_final, text="No, comenzar de nuevo", 
-                             command=lambda: ir_a_pagina(pagina_final, pagina_masa))
+                             command=lambda: ir_a_pagina(pagina_final, crear_pagina_masa(root)))
     volver_btn.pack(pady=20)
 
     siguiente_btn = ttk.Button(pagina_final, text="Sí, finalizar",
-                             command=lambda: ir_a_pagina(pagina_final, pagina_inicio))
+                             command=lambda: ir_a_pagina(pagina_final, crear_pagina_inicio(root)))
     siguiente_btn.pack(pady=20)
 
-    boton_atras(pagina_final, pagina_extras)
+    boton_atras(pagina_final, crear_pagina_extras(root))
 
     return pagina_final
-
-if __name__ == "__main__":
-    root = tk.Tk()
-    root.title("Personaliza tu pizza")
-
-    pagina_inicio = pagina_inicio(root)
-    pagina_masa = pagina_masa(root)
-    pagina_salsa = pagina_salsa(root)
-    pagina_ingredientes = pagina_ingredientes(root)
-    pagina_coccion = pagina_coccion(root)
-    pagina_presentacion = pagina_presentacion(root)
-    pagina_maridaje = pagina_maridaje(root)
-    pagina_extras = pagina_extras(root)
-    pagina_final = pagina_final(root)
-
-    pagina_inicio.pack()
-
-    root.mainloop()
