@@ -27,7 +27,9 @@ def cambiar_color(checkbutton, seleccionado):
 
 def crear_pagina_inicio(root):
     pagina_inicio = tk.Frame(root)
-    inicio_lb = tk.Label(pagina_inicio, text="¡Bienvenido a la personalización de pizza!")
+    bienvenido_lb = tk.Label(pagina_inicio, text="¡Bienvenido a la Pizzería\nDELIZIOSO!", font=("Brush Script MT", 40, "bold"))
+    bienvenido_lb.pack(padx=20, pady=20)
+    inicio_lb = tk.Label(pagina_inicio, text="Donde nos especializamos en personalizar pizzas")
     inicio_lb.pack(padx=20, pady=20)
 
     comenzar_btn = ttk.Button(pagina_inicio, text="Empieza a preparar tu pizza",
