@@ -14,12 +14,6 @@ class Director:
     def builder(self, builder: Builder) -> None:
         self._builder = builder
 
-    def construir_min(self) -> None:
-        self.builder.masa()
-        self.builder.salsa()
-        self.builder.ingredientes()
-        self.builder.coccion()
-
     def construir_completo(self) -> None:
         self.builder.masa()
         self.builder.salsa()

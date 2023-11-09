@@ -16,6 +16,9 @@ class PizzaBuilder(Builder):
         return pizza
 
     def masa(self) -> None:
+        '''
+        El cliente selecciona el tipo de masa que quiere para su pizza
+        '''
         while True:
             print("Seleccione el tipo de masa: \n- Masa tradicional\n- Masa integral\n- Masa sin gluten\n")
             opcion = input(">> ")
@@ -26,6 +29,9 @@ class PizzaBuilder(Builder):
                 print("Opción no valida\n")
 
     def salsa(self) -> None:
+        '''
+        El cliente selecciona el tipo de salsa que quiere para su pizza
+        '''
         while True:
             print("Seleccione el tipo de salsa: \n- Salsa de tomate\n- Salsa barbacoa\n- Salsa carbonara\n")
             opcion = input(">> ")
@@ -36,6 +42,9 @@ class PizzaBuilder(Builder):
                 print("Opción no valida\n")
 
     def ingredientes(self) -> None:
+        '''
+        El cliente selecciona los ingredientes que quiere para su pizza, aunque también le damos una recomendación
+        '''
         # Primero hacemos una recomendación basada en las opciones seleccionadas hasta ahora.
         if self._pizza.partes[0] == "Masa tradicional" and self._pizza.partes[1] == "Salsa de tomate":
             print("Le recomendamos agregar jamón y queso")
@@ -62,6 +71,9 @@ class PizzaBuilder(Builder):
                 print("Hay alguna opción no válida, vuelva a intentarlo\n")
 
     def coccion(self) -> None:
+        '''
+        El cliente selecciona el tipo de cocción que quiere para su pizza
+        '''
         while True:
             print("Seleccione el tipo de cocción: \n- Horno de leña\n- Horno electrico\n- Horno de gas\n")
             opcion = input(">> ")
@@ -72,6 +84,9 @@ class PizzaBuilder(Builder):
                 print("Opción no valida\n")
 
     def presentacion(self) -> None:
+        '''
+        El cliente selecciona el tipo de presentación que quiere para su pizza
+        '''
         while True:
             print("Seleccione el tipo de presentación: \n- Pizza entera\n- Pizza por raciones\n")
             opcion = input(">> ")
@@ -82,6 +97,9 @@ class PizzaBuilder(Builder):
                 print("Opción no valida\n")
 
     def maridajes(self) -> None:
+        '''
+        El cliente selecciona el tipo de maridaje que quiere para su pizza, aunque también le damos una recomendación
+        '''
         # Primero hacemos una recomendación basada en las opciones seleccionadas hasta ahora.
         if self._pizza.partes[0] == "Masa tradicional" and self._pizza.partes[1] == "Salsa de tomate" and self._pizza.partes[2] == ["Jamon", "Queso"]:
             print("Maridaje recomendado: Vino tinto")
@@ -102,6 +120,9 @@ class PizzaBuilder(Builder):
                 print("Opción no válida\n")
 
     def extras(self) -> None:
+        '''
+        El cliente selecciona si quier agregar algún ingrediente extra a la pizza
+        '''
         while True:
             print("Seleccione los extras separados por comas: \n- Queso extra\n- Jamon extra\n- Bacon extra\n- Cebolla extra\n- Pimiento extra\n- Piña extra\n- Carne picada extra\n- Pollo extra\n- Atun extra\n- Tomate extra\n- Aceitunas extra\n- Maiz extra\n- Champiñones extra\n- Anchoas extra\n- Salami extra\n- Pimiento picante extra\n- Rucula extra\n- Salsa barbacoa extra\n- Salsa carbonara extra\n- None\n")
             opciones = input(">> ").split(", ")
