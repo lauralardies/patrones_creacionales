@@ -89,7 +89,34 @@ def pagina_ingredientes(root):
     ingredientes_lb = tk.Label(pagina_ingredientes, text="Elige tus ingredientes:")
     ingredientes_lb.pack(padx=20, pady=20)
 
-    # Aquí puedes agregar elementos como casillas de verificación para los ingredientes
+    opciones_ingredientes = [
+        "Jamon",
+        "Queso",
+        "Bacon",
+        "Cebolla",
+        "Pimiento",
+        "Piña",
+        "Carne picada",
+        "Pollo",
+        "Atun",
+        "Tomate",
+        "Aceitunas",
+        "Maiz",
+        "Champiñones",
+        "Anchoas",
+        "Salami",
+        "Pimiento picante",
+        "Rucula",
+        "Salsa barbacoa",
+        "Salsa carbonara"
+    ]
+
+    ingredientes_vars = []
+    for ingrediente in opciones_ingredientes:
+        var = tk.BooleanVar()
+        c = ttk.Checkbutton(pagina_ingredientes, text=ingrediente, variable=var)
+        c.pack(anchor='w')
+        ingredientes_vars.append((ingrediente, var))
 
     siguiente_btn = ttk.Button(pagina_ingredientes, text="Siguiente",
                              command=lambda: ir_a_pagina(pagina_ingredientes, pagina_coccion))
@@ -187,7 +214,32 @@ def pagina_extras(root):
     extras_lb = tk.Label(pagina_extras, text="Agrega extras a tu pizza:")
     extras_lb.pack(padx=20, pady=20)
 
-    # Aquí puedes agregar elementos como casillas de verificación para los extras
+    opciones_extras = [
+        "Queso extra",
+        "Bacon extra",
+        "Cebolla extra",
+        "Piña extra",
+        "Carne picada extra",
+        "Pollo extra",
+        "Atun extra",
+        "Tomate extra",
+        "Aceitunas extra",
+        "Maiz extra",
+        "Champiñones extra",
+        "Anchoas extra",
+        "Salami extra",
+        "Pimiento picante extra",
+        "Rucula extra",
+        "Salsa barbacoa extra",
+        "Salsa carbonara extra"
+    ]
+
+    extras_vars = []
+    for extra in opciones_extras:
+        var = tk.BooleanVar()
+        c = ttk.Checkbutton(pagina_extras, text=extra, variable=var)
+        c.pack(anchor='w')
+        extras_vars.append((extra, var))
 
     siguiente_btn = ttk.Button(pagina_extras, text="Siguiente",
                              command=lambda: ir_a_pagina(pagina_extras, pagina_final))
