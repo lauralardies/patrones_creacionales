@@ -44,6 +44,8 @@ def pagina_masa(root):
                              command=lambda: ir_siguiente_pagina(pagina_masa, pagina_salsa))
     siguiente_btn.pack(pady=20)
 
+    boton_atras(pagina_masa, pagina_inicio)
+
     return pagina_masa
 
 def pagina_salsa(root):
@@ -56,6 +58,8 @@ def pagina_salsa(root):
     siguiente_btn = ttk.Button(pagina_salsa, text="Siguiente",
                              command=lambda: ir_siguiente_pagina(pagina_salsa, pagina_ingredientes))
     siguiente_btn.pack(pady=20)
+
+    boton_atras(pagina_salsa, pagina_masa)
 
     return pagina_salsa
 
@@ -70,6 +74,8 @@ def pagina_ingredientes(root):
                              command=lambda: ir_siguiente_pagina(pagina_ingredientes, pagina_coccion))
     siguiente_btn.pack(pady=20)
 
+    boton_atras(pagina_ingredientes, pagina_salsa)
+
     return pagina_ingredientes
 
 def pagina_coccion(root):
@@ -82,6 +88,8 @@ def pagina_coccion(root):
     siguiente_btn = ttk.Button(pagina_coccion, text="Siguiente",
                              command=lambda: ir_siguiente_pagina(pagina_coccion, pagina_presentacion))
     siguiente_btn.pack(pady=20)
+
+    boton_atras(pagina_coccion, pagina_ingredientes)
 
     return pagina_coccion
 
@@ -96,6 +104,8 @@ def pagina_presentacion(root):
                              command=lambda: ir_siguiente_pagina(pagina_presentacion, pagina_maridaje))
     siguiente_btn.pack(pady=20)
 
+    boton_atras(pagina_presentacion, pagina_coccion)
+
     return pagina_presentacion
 
 def pagina_maridaje(root):
@@ -109,6 +119,8 @@ def pagina_maridaje(root):
                              command=lambda: ir_siguiente_pagina(pagina_maridaje, pagina_extras))
     siguiente_btn.pack(pady=20)
 
+    boton_atras(pagina_maridaje, pagina_presentacion)
+
     return pagina_maridaje
 
 def pagina_extras(root):
@@ -121,6 +133,8 @@ def pagina_extras(root):
     siguiente_btn = ttk.Button(pagina_extras, text="Finalizar",
                              command=lambda: ir_siguiente_pagina(pagina_extras, pagina_inicio))
     siguiente_btn.pack(pady=20)
+
+    boton_atras(pagina_extras, pagina_maridaje)
 
     return pagina_extras
 
