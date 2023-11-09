@@ -1,6 +1,12 @@
 import tkinter as tk
 from tkinter import ttk
 
+
+
+def boton_salir(pagina):
+    exit_button = ttk.Button(pagina, text="Salir", command=root.quit)
+    exit_button.pack(pady=20)
+
 def ir_siguiente_pagina(pagina_actual, siguiente_pagina):
     pagina_actual.pack_forget()
     siguiente_pagina.pack()
@@ -22,6 +28,8 @@ def pagina_inicio(root):
     comenzar_btn = ttk.Button(pagina_inicio, text="Empieza a preparar tu pizza",
                               command=lambda: ir_siguiente_pagina(pagina_inicio, pagina_masa))
     comenzar_btn.pack(pady=20)
+
+    boton_salir(pagina_inicio)
 
     return pagina_inicio
 
@@ -111,7 +119,7 @@ def pagina_extras(root):
     # Aquí puedes agregar elementos como casillas de verificación para los extras
 
     siguiente_btn = ttk.Button(pagina_extras, text="Finalizar",
-                             command=root.quit)
+                             command=lambda: ir_siguiente_pagina(pagina_extras, pagina_inicio))
     siguiente_btn.pack(pady=20)
 
     return pagina_extras
